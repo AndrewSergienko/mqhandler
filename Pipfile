@@ -6,6 +6,14 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+pre-commit = "*"
+pytest = "*"
+black = "*"
+isort = "*"
+mypy = "*"
+flake8 = "*"
+pytest-asyncio = "*"
+pytest-env = "*"
 
 [requires]
 python_version = "3.10"
