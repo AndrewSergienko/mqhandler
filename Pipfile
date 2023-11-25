@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+aio-pika = "*"
 
 [dev-packages]
 pre-commit = "*"
