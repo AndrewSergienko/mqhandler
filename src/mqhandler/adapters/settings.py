@@ -17,6 +17,6 @@ class SettingsProto(Protocol):
 class SettingsRepo(SettingsProto):
     async def get(self, name: str, raise_exc=False) -> str | None:
         value = os.environ.get(name)
-        if not raise_exc:
-            return value
-        raise ValueError(f"The setting named {name} does not exist")
+        if not value and raise_exc:
+            raise ValueError(f"The setting named {name} does not exist")
+        return value

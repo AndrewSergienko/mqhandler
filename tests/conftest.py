@@ -1,9 +1,17 @@
+import asyncio
+import socket
 from datetime import datetime
+from typing import Generator
 
+import aiohttp
+from aiohttp import web
 from pytest import fixture
 
-from mqhandler.adapters.settings import SettingsRepo
+from mqhandler.adapters.output import OutputAdapter, OutputProto
+from mqhandler.adapters.settings import SettingsProto, SettingsRepo
+from mqhandler.adapters.web import WebAdapter, WebProto
 from mqhandler.domain.dto import TgMessage
+from mqhandler.infractructure.bootstrap import get_web_session
 from mqhandler.services.context import Context
 
 
