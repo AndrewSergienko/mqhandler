@@ -6,17 +6,19 @@ name = "pypi"
 [packages]
 aio-pika = "*"
 aiohttp = "*"
+adaptix = "*"
+aiofiles = "*"
 
 [dev-packages]
 pre-commit = "*"
 pytest = "*"
 black = "*"
-isort = "*"
 mypy = "*"
 flake8 = "*"
 pytest-asyncio = "*"
 pytest-env = "*"
 pytest-aiohttp = "*"
+isort = "*"
 
 [requires]
 python_version = "3.10"

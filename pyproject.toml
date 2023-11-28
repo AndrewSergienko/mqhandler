@@ -2,8 +2,9 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
-[tools.isort]
+[tool.isort]
 profile = "black"
+line_length = 79
 
 [tool.black]
 line-length = 79
@@ -11,3 +12,4 @@ target-version = ['py310']
 
 [tool.pytest_env]
 TEST_ENV = "TEST_VALUE"
+FILE_PATH = "test_message.json"
