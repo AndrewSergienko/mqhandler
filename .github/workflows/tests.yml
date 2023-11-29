@@ -33,7 +33,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pipenv
         pipenv install -d
-        pip install -e .
     - name: Test with pytest
       run: |
         pipenv run pytest tests --cov
