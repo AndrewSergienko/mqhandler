@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Generator
 
 import aiohttp
+import pytest
 from aiohttp import web
 from pytest import fixture
 
@@ -16,7 +17,7 @@ from mqhandler.adapters.output import OutputAdapter, OutputProto
 from mqhandler.adapters.settings import SettingsProto, SettingsRepo
 from mqhandler.adapters.web import WebAdapter, WebProto
 from mqhandler.domain.dto import TgMessage
-from mqhandler.infractructure.bootstrap import get_root_path, get_web_session
+from mqhandler.infractructure.bootstrap import get_root_path
 from mqhandler.services.context import Context
 
 
@@ -47,10 +48,8 @@ def output_adapter() -> OutputProto:
 
 
 @fixture
-def web_adapter(web_session) -> Generator[WebProto, None, None]:
-    yield WebAdapter(web_session)
-    # close aiohttp session
-    asyncio.run(web_session.close())
+def web_adapter(web_session) -> WebProto:
+    return WebAdapter(web_session)
 
 
 @fixture
@@ -84,9 +83,11 @@ def delete_test_file(test_file_path) -> Generator[None, None, None]:
         os.remove(test_file_path)
 
 
-@fixture
+@fixture(scope="session")
 def web_session() -> aiohttp.ClientSession:
-    return get_web_session()
+    session = aiohttp.ClientSession()
+    yield session
+    asyncio.run(session.close())
 
 
 @fixture
