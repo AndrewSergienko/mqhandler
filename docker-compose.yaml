@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  handler:
+    image: mqhandler
+    container_name: handlers
+    command: bash -c "pipenv run python src/mqhandler/infrastructure/mq/health_check.py && pipenv run python src/mqhandler/infrastructure/mq/run.py"
+    env_file:
+      - .env
+    depends_on:
+      - mq
+
+  mq:
+    image: rabbitmq:3-management
+    container_name: message_queue
+    ports:
+      - "${AMQP_PORT}:${AMQP_PORT}"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${AMQP_USER}
+      - RABBITMQ_DEFAULT_PASS=${AMQP_PASSWORD}
+      - RABBITMQ_DEFAULT_VHOST=${AMQP_VHOST}
