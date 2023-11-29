@@ -4,14 +4,14 @@ from typing import Any, Callable, Coroutine
 import aio_pika
 from aio_pika.abc import AbstractIncomingMessage
 
-from mqhandler.infractructure.bootstrap import (
+from mqhandler.infrastructure.bootstrap import (
     get_context,
     get_mq_url,
     get_root_path,
     get_web_session,
     logging_setup,
 )
-from mqhandler.infractructure.mq.handlers import get_handlers
+from mqhandler.infrastructure.mq.handlers import get_handlers
 
 Handler = Callable[[AbstractIncomingMessage], Coroutine[Any, Any, None]]
 
