@@ -17,7 +17,7 @@ from mqhandler.adapters.output import OutputAdapter, OutputProto
 from mqhandler.adapters.settings import SettingsProto, SettingsRepo
 from mqhandler.adapters.web import WebAdapter, WebProto
 from mqhandler.domain.dto import TgMessage
-from mqhandler.infractructure.bootstrap import get_root_path
+from mqhandler.infrastructure.bootstrap import get_root_path
 from mqhandler.services.context import Context
 
 
