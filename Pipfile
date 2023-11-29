@@ -8,6 +8,7 @@ aio-pika = "*"
 aiohttp = "*"
 adaptix = "*"
 aiofiles = "*"
+mqhandler = {file = "."}
 
 [dev-packages]
 pre-commit = "*"
@@ -24,3 +25,6 @@ pytest-cov = "*"
 [requires]
 python_version = "3.10"
 python_full_version = "3.10.12"
+
+[pipenv]
+allow_prereleases = true
