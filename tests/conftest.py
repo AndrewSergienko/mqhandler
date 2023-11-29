@@ -47,10 +47,8 @@ def output_adapter() -> OutputProto:
 
 
 @fixture
-def web_adapter(web_session) -> Generator[WebProto, None, None]:
-    yield WebAdapter(web_session)
-    # close aiohttp session
-    asyncio.run(web_session.close())
+def web_adapter(web_session) -> WebProto:
+    return WebAdapter(web_session)
 
 
 @fixture
@@ -84,9 +82,11 @@ def delete_test_file(test_file_path) -> Generator[None, None, None]:
         os.remove(test_file_path)
 
 
-@fixture
+@fixture(scope="session")
 def web_session() -> aiohttp.ClientSession:
-    return get_web_session()
+    session = get_web_session()
+    yield session
+    asyncio.run(session.close())
 
 
 @fixture
