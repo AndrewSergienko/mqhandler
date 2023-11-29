@@ -1,0 +1,42 @@
+name: Python application
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      TEST_ENV: TEST_VALUE
+      FILE_PATH: test_message.json
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Set env variables
+      run: |
+        echo "TEST_ENV=$TEST_ENV" >> $GITHUB_ENV
+        echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pipenv
+        pipenv install -d
+    - name: Test with pytest
+      run: |
+        pipenv run pytest tests --cov
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
