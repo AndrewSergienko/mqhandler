@@ -84,7 +84,7 @@ def delete_test_file(test_file_path) -> Generator[None, None, None]:
 
 @fixture(scope="session")
 def web_session() -> aiohttp.ClientSession:
-    session = get_web_session()
+    session = aiohttp.ClientSession()
     yield session
     asyncio.run(session.close())
 
