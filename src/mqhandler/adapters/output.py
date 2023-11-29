@@ -10,6 +10,7 @@ class OutputProto(Protocol):
 
 class OutputAdapter(OutputProto):
     def __init__(self):
+        # Execute code in a separate thread to avoid blocking the event loop
         self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
 
     async def info(self, msg: str) -> None:

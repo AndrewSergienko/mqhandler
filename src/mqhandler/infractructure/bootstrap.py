@@ -32,6 +32,10 @@ def logging_setup() -> None:
 
 
 def get_root_path() -> Path:
+    """
+    Get the root path from this file.
+    NOTE: If the file is moved, you need to edit the function.
+    """
     return Path(__file__).parent.parent.parent.parent
 
 
