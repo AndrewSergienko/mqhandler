@@ -106,17 +106,3 @@ def port() -> int:
     sock = socket.socket()
     sock.bind(("", 0))
     return sock.getsockname()[1]
-
-
-@pytest.yield_fixture
-def event_loop():
-    """Create an instance of the default event loop for each test case."""
-    policy = asyncio.get_event_loop_policy()
-    res = policy.new_event_loop()
-    asyncio.set_event_loop(res)
-    res._close = res.close
-    res.close = lambda: None
-
-    yield res
-
-    res._close()
