@@ -1,8 +1,9 @@
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
 import aiohttp
 
 
+@runtime_checkable
 class WebProto(Protocol):
     async def post(self, url: str, data: dict) -> int:
         """Send a POST request to the url."""

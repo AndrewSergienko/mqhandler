@@ -23,7 +23,7 @@ class TestTgMessageAdapter:
 
     @pytest.mark.asyncio
     async def test_set_message(
-        self, tg_message, tg_message_repo, test_file_path
+        self, tg_message, tg_message_repo, test_file_path, delete_test_file
     ):
         await tg_message_repo.set_message(test_file_path, tg_message)
 

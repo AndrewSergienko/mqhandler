@@ -1,7 +1,8 @@
 import os
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
 
+@runtime_checkable
 class SettingsProto(Protocol):
     async def get(self, name: str, raise_exc=False) -> str | None:
         """
