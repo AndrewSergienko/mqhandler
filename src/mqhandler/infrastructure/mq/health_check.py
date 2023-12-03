@@ -9,6 +9,10 @@ from mqhandler.adapters.settings import SettingsRepo
 
 
 async def check_connection():
+    """
+    Check the connection to the URL.
+    If successful, exit the program with code 0, if not, then 1.
+    """
     settings = SettingsRepo()
 
     address = await settings.get("AMQP_ADDRESS", raise_exc=True)
@@ -17,8 +21,6 @@ async def check_connection():
     password = await settings.get("AMQP_PASSWORD", raise_exc=True)
 
     url = f"ampq://{user}:{password}@{address}:{port}/"
-
-    print(url)
 
     rollback = 1
     while rollback <= 16:
