@@ -1,15 +1,13 @@
 import asyncio
 import json
 import os
-import socket
 from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
 from typing import Generator
 
 import aiohttp
-import pytest
-from aiohttp import web
+import fake
 from pytest import fixture
 
 from mqhandler.adapters.message import TgMessageProto, TgMessageRepo
@@ -17,7 +15,11 @@ from mqhandler.adapters.output import OutputAdapter, OutputProto
 from mqhandler.adapters.settings import SettingsProto, SettingsRepo
 from mqhandler.adapters.web import WebAdapter, WebProto
 from mqhandler.domain.dto import TgMessage
-from mqhandler.infrastructure.bootstrap import get_root_path
+from mqhandler.infrastructure.bootstrap import (
+    get_context,
+    get_root_path,
+    get_web_session,
+)
 from mqhandler.services.context import Context
 
 
@@ -28,12 +30,17 @@ def tg_message() -> TgMessage:
 
 @fixture
 def context(web_session) -> Context:
+    return get_context(web_session, get_root_path())
+
+
+@fixture
+def fake_context() -> Context:
     return Context(
-        SettingsRepo(),
-        OutputAdapter(),
-        WebAdapter(web_session),
-        TgMessageRepo(),
-        get_root_path(),
+        fake.FakeSettingsRepo(),
+        fake.FakeOutputAdapter(),
+        fake.FakeWebAdapter(),
+        fake.FakeTgMessageAdapter(),
+        Path("fake_path"),
     )
 
 
@@ -85,24 +92,6 @@ def delete_test_file(test_file_path) -> Generator[None, None, None]:
 
 @fixture(scope="session")
 def web_session() -> aiohttp.ClientSession:
-    session = aiohttp.ClientSession()
+    session = get_web_session()
     yield session
     asyncio.run(session.close())
-
-
-@fixture
-def server_app() -> web.Application:
-    async def handler(request: web.Request):
-        return web.Response(status=200)
-
-    app = web.Application()
-    app.router.add_post("/", handler)
-
-    return app
-
-
-@fixture
-def port() -> int:
-    sock = socket.socket()
-    sock.bind(("", 0))
-    return sock.getsockname()[1]

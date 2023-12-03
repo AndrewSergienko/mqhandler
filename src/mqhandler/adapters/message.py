@@ -2,13 +2,14 @@ import json
 from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
 import aiofiles
 
 from mqhandler.domain.dto import TgMessage
 
 
+@runtime_checkable
 class TgMessageProto(Protocol):
     async def get_message(self, file_path: Path) -> TgMessage:
         """Get stored message from file."""

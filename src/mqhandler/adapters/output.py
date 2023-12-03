@@ -1,7 +1,8 @@
 import concurrent.futures
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
 
+@runtime_checkable
 class OutputProto(Protocol):
     async def info(self, msg: str) -> None:
         """Display the message on the screen."""
