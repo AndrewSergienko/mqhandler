@@ -1,7 +1,7 @@
 # Message Queue Handler
 <p align="center">
     <a href="https://codecov.io/gh/AndrewSergienko/simple-cdn-server" >
-     <img src="https://codecov.io/gh/AndrewSergienko/simple-cdn-server/branch/master/graph/badge.svg?token=PHAIHK4J5U"/>
+        <img src="https://codecov.io/gh/AndrewSergienko/simple-cdn-server/branch/master/graph/badge.svg?token=PHAIHK4J5U"/>
     </a>
     <img src="https://img.shields.io/badge/python-3.10.12-blue?logo=python" alt="Python Version">
     <a href="https://github.com/AndrewSergienko/simple-cdn-server/actions">
