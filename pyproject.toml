@@ -2,6 +2,24 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name="mqhandler"
+version="0.1.1"
+dependencies = [
+    "aio-pika",
+    "aiohttp",
+    "adaptix",
+    "aiofiles",
+]
+
+[project.optional-dependencies]
+tests = [
+    'pytest',
+    'pytest-asyncio',
+    'pytest-env',
+    'pytest-cov'
+]
+
 [tool.isort]
 profile = "black"
 line_length = 79
