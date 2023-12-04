@@ -7,5 +7,4 @@ RUN python -m pip install --upgrade pip
 
 COPY . ./
 
-RUN pip install pipenv
-RUN pipenv install
+RUN pip install -e .
