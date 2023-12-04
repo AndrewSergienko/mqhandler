@@ -4,7 +4,7 @@ services:
   handler:
     image: sergienkoandrew/mqhandler
     container_name: handlers
-    command: bash -c "pipenv run python src/mqhandler/infrastructure/mq/health_check.py && pipenv run python src/mqhandler/infrastructure/mq/run.py"
+    command: bash -c "python src/mqhandler/infrastructure/mq/health_check.py && python src/mqhandler/infrastructure/mq/run.py"
     env_file:
       - .env
     depends_on:
